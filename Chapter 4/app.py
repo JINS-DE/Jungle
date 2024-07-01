@@ -3,8 +3,7 @@ flask란?
 파이썬으로 쓰인 웹 프레임워크로, 서버를 구동하는 데 필요한 여러 기능들을 제공합니다.
 '''
 
-from flask import Flask
-from flask import render_template
+from flask import Flask, render_template
 app = Flask(__name__)
 
 @app.route('/')
