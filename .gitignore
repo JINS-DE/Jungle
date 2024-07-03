@@ -16,5 +16,5 @@ link.txt
 pyvenv.cfg
 .venv
 pip-selfcheck.json
-
+my_key_pair.pem
 # End of https://www.toptal.com/developers/gitignore/api/venv

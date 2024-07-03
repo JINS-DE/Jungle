@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>메모 애플리케이션</title>
+    <style>
+        * {
+            font-family: "Stylish", sans-serif;
+        }
+
+        .wrap {
+            width: 1000px;
+            margin: auto;
+        }
+
+        .memo-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .memo {
+            background-color: gainsboro;
+            padding: 20px;
+            border: 1px solid #ccc;
+        }
+
+        #post-content {
+            margin-bottom: 20px;
+        }
+
+        #btn-custom {
+            margin: 0;
+            padding: 0px;
+            white-space: nowrap;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="wrap">
+        <div id="post-content">
+            <input type="text" id="memo-title" placeholder="제목">
+            <textarea id="memo-content" placeholder="내용"></textarea>
+            <button id="save-button" class="btn btn-primary">저장하기</button>
+        </div>
+
+        <div id="card-list" class="memo-container">
+            <!-- 메모가 추가될 영역 -->
+        </div>
+    </div>
+
+    <script>
+        let memoCount = 0;
+
+        function addMemo(title, content) {
+            memoCount++;
+            let memoHtml = `<div class="memo">
+                                <h5>${title}</h5>
+                                <p>${content}</p>
+                                <button type="button" onclick="showUpdate('${title}', '${content}')" id="btn-custom" class="btn btn-info">수정</button>
+                                <button type="button" onclick="deleteMemo('${title}')" id="btn-custom" class="btn btn-danger">삭제</button>
+                            </div>`;
+
+            let position;
+            switch (memoCount) {
+                case 1:
+                    position = "1 / 1"; // 1행 1열
+                    break;
+                case 2:
+                    position = "2 / 1"; // 2행 1열
+                    break;
+                case 3:
+                    position = "1 / 2"; // 1행 2열
+                    break;
+                case 4:
+                    position = "2 / 2"; // 2행 2열
+                    break;
+                default:
+                    position = "auto"; // 그 외의 메모는 자동 배치
+            }
+
+            let memoElement = document.createElement('div');
+            memoElement.innerHTML = memoHtml;
+            memoElement.style.gridArea = position;
+            document.getElementById('card-list').appendChild(memoElement);
+        }
+
+        document.getElementById('save-button').addEventListener('click', function () {
+            let title = document.getElementById('memo-title').value;
+            let content = document.getElementById('memo-content').value;
+            addMemo(title, content);
+        });
+    </script>
+</body>
+
+</html>
